@@ -34,15 +34,13 @@ jobs:
 
       - name: Alembic upgrade heads
         run: poetry run alembic -c alembic.ini upgrade heads
+
       - name: Poetry run pytest
         run: poetry run pytest
 
       - name: Modify api_config.py
         run: |
           sed -i 's|SESSION_REDIS_HOST = "localhost"|SESSION_REDIS_HOST = "host.docker.internal"|' config/api_config.py
-
-      - name: Poetry run pytest
-        run: poetry run pytest
 
       # - name: Set up Docker Buildx
       #   uses: docker/setup-buildx-action@v1
